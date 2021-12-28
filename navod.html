@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title>WAP - projekt (návod)</title>
+<meta name="description" content="Projekt (návod) - Tabulka s dynamickými sloupci a řádky" />
+<meta name="keywords" content="tabulka, WAP, projekt" />
+<meta name="author" content="xpastu00@stud.fit.vutbr.cz" />
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link rel="stylesheet" type="text/css" href="style.css">
+<style>
+	#wrapper {
+		width: 1000px;
+		margin: 0 auto;
+		padding: 10px 0 20px;
+	}
+	.images {
+		text-align: center;
+		text-decoration: underline;
+	}
+	hr {
+		margin: 15px 0;
+	}
+</style>
+</head>
+
+<body>
+
+<div id="wrapper">
+
+<h2>WAP - projekt</h2>
+<h3>Tabulka s dynamickými sloupci a řádky</h3>
+<h4>Jakub Pastuszek (xpastu00@stud.fit.vutbr.cz)</h4>
+
+<br/>
+
+<p>Projekt demonstruje přizpůsobení, jinak statické, tabulky v HTML pomocí základního JavaScriptu bez použití jakéhokoliv frameworku.
+Pro převedení klasické tabulky na dynamickou (v rámci řešení/zadání projektu) je nutné připojit skript "xpastu.js" do hlavičky daného HTML dokumentu.
+Dále je nutné v úvodu tohoto skriptu zadat ID dané tabulky, aby skript měl možnost rozpoznat, která tabulky má být "dynamická". Na začátku skriptu jsou také dvě 
+proměnné (customBG, customCOLOR) pomocí nichž lze automaticky nastavit barvu pozadí a textu hlavičky, aby bylo na první pohled možné rozpoznat danou dynamickou tabulku
+a případně i buňky, pomocí kterých lze měnit pořadí sloupců. 
+</p>
+
+<hr/>
+
+<p>
+Změna šířky sloupce, příp. výšky řádku, je prováděná "nejetím" kurzoru myši nad patřičnou hranu buňky a poté pomocí stiskutí tlačítka na myši a následným tažením do 
+příslušného směru tuto buňku rozšiřovat/zmenšovat. Společně s danou buňkou jsou měněny rozměry také všech buňěk v daném sloupci, příp. řádku, jak je očekáváno<br/>
+<div class="images">
+Základní tabulka<br/>
+<img src="img/size_N.png" alt="resize-normal"/><br/>
+Změna šířky<br/>
+<img src="img/size_W.png" alt="resize-width"/><br/>
+Změna výšky<br/>
+<img src="img/size_H.png" alt="resize-height"/><br/>
+</div>
+</p>
+
+<hr/>
+
+<p>
+Přetahování sloupců je prováděno obdobně, jako změna šířky/výšky buňky. V tomto případě je potřebné najet kurzorem myši nad záhlaví tabulky a poté pomocí stiknutého 
+tlačítka a pohybu myši lze daný sloupec přesunout na pozici jiného sloupce. Vložení přetahovaného sloupce se provede za cílový sloupec.
+V případě nesprávného přetažení, skript oznámí chybu vyskočením vyskakovacího okna (alert). Za chybu se považuje to, když přetahovaný sloupec (sloupce v příp. colspan)
+obsahují alespoň jednu buňku, která sahé mimo daný sloupec - tzn. začíná v předchozí sloupci, příp. končí ve sloupci následujícím.<br/>
+<div class="images">
+Akce drag (sebrání)<br/>
+<img src="img/drag.png" alt="drag"/><br/>
+Akce drop (upuštění)<br/>
+<img src="img/drop.png" alt="drop"/><br/>
+</div>
+</p>
+
+<hr/>
+
+<p>
+Daný skript je funkční a byl testovám v prohlížečích IE11, Microsoft EDGE (v12), Mozilla Firefox (v52.0.2), Opera (v43), Google Chrome (v57.0.2987).<br/>
+Dle <a href="https://www.w3schools.com/browsers/browsers_explorer.asp" target="_blank">statistiky používání IE</a> lze považovat starší prohlížeče než IE11 za 
+globálně již nepoužívané a proto již nemá smysl pro tyto verze web přizpůsobovat, avšak základní funkcionalita musí zůstat, což v tomto případě platí.
+</p>
+
+<p>
+Na ukázkové stránce ("demo.html") je vytvořeno několik tabulek pro odzkoušení funkčnosti skriptu. Pro výběr jiné aktivní ("dynamické") tabulky je zapotřebí pouze
+zadat ve skriptu ID dané tabulky.
+Při načtení stránky (událost window.onLoad) jsou do každé buňky v těle dané tabulky vloženy dva prázdné "divy" o velikosti 5px od okraje buňky, které slouží
+pro výběr možnosti změny šířky/výšky. Možnost této akce je naznačena ikonou posuvu. 
+Buňky v prvním řádku hlavičky jsou označeny jako "dragable", což znamená, že lze s nima pohybovat. Tato možnost je naznačena 4-směrovou šipkou. 
+</p>
+
+<hr/>
+
+<p>
+<span class="images">Známé nedostatky:</span> Implementace se nesnaží plně suplementovat MS Excel, z hlediska rozšiřování sloupců/řádků se chová obdobně,
+ale v případě přesouvání se tato aplikace liší a to následovně - po přetažení sloupce X na sloupec Y, si tyto sloupce vymění své pozice (dojde k prohození).
+Dále v případě použití "span-u" jinde než v hlavičce tabulky jejich výskyt způsobí problémy a to hlavně v počítání indexu buňky v rámci řádku.
+</p>
+
+<hr/>
+
+<p>
+<span class="images">Pozn. pod čarou:</span> Práce s tabulkam v JavaScriptu po sloupcích je nejenže komplikovaná a krkolomná, ale při výskytu "span-ů"
+ještě komplikovanější. Dále při výskytu "span-ů" v těle tabulky a následném přesouvání některých sloupců může nastat problém, kdy je buňka roztáhla mimo daný sloupec.
+Podpora Drag&Drop v moderněších prohlížečích je již na dobré úrovni, ale stále zde existují jisté divergence a v případě IE (které si většinou šlo svou
+cestou a házelo vývojářům klacky pod nohy) dokonce nesmyslná implementace této funkce, které schopen jen expert na IE.<br/>
+Projekt celkově zajímavý (vyzkoušel jsem si po delší době čistý JavaScript), a musím uznat, že frameworky opravdu usnadňují práci a dokonce člověka
+děle udrží v pozornosti, díky tomu, že vytváření kódu je intuitivní a dalo by se říct i "chytlavé". 
+</p>
+</div>
+
+</body>
+</html>

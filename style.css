@@ -1,0 +1,26 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+table {
+	margin: 15px 20px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    border-collapse: collapse;
+}
+
+table td {
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+}
+
+table th {
+	background-color: #bbb;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+	text-align: center;
+}
